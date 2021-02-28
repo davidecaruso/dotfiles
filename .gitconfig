@@ -1,0 +1,64 @@
+[user]
+    email = davide.caruso93@gmail.com
+    name = Davide Caruso
+
+[core]
+    editor = vim
+
+[init]
+    defaultBranch = main
+
+[alias]
+    # Branches
+    br = branch
+    co = checkout
+    new = checkout -b
+    mv = branch -m
+
+    # Commit
+    a = add
+    aa = add .
+    ci = commit
+    ca = !git add . && git commit
+    cu = commit --amend
+
+    # Remote
+    pa = !git push --all origin && git push --tags
+    pp = !git pull && git push
+
+    # Stats
+    l = log
+    ll = log --graph
+    st = status
+
+    # Diffs
+    d = !git diff $1..$2 --name-status
+    da = !git all-diffs --diff-filter=A
+    dc = !git all-diffs --diff-filter=C
+    dd = !git all-diffs --diff-filter=D
+    dm = !git all-diffs --diff-filter=M
+    dr = !git all-diffs --diff-filter=R
+
+    # Undoes
+    clear = !git add . && git reset --hard HEAD
+    untag = !git push --delete origin $1 && git tag --delete $1
+    unstage = !git reset HEAD -- $1
+    uncommit = !git reset --soft HEAD~
+
+    # Misc
+    f = fetch -pv
+    cp = cherry-pick
+    git = !exec git
+    chmod = !git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply
+
+[gitflow "branch"]
+    master = main
+    develop = develop
+
+[gitflow "prefix"]
+    feature = "feature/"
+    bugfix = "bugfix/"
+    release = "release/"
+    hotfix = "hotfix/"
+    support = "support/"
+    versiontag =
