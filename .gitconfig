@@ -41,8 +41,9 @@
 
     # Undoes
     clear = !git add . && git reset --hard HEAD
+    undo = !git restore -- $1
     untag = !git push --delete origin $1 && git tag --delete $1
-    unstage = !git reset HEAD -- $1
+    unstage = !git restore --staged -- $1
     uncommit = !git reset --soft HEAD~
 
     # Misc
