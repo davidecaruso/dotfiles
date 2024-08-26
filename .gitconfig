@@ -1,19 +1,26 @@
 [user]
-    email = davide.caruso93@gmail.com
-    name = Davide Caruso
+    email = [EMAIL]
+    name = [NAME]
 
 [core]
     editor = vim
 
 [init]
-    defaultBranch = main
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
 
 [alias]
-    # Branches
+    # Branch
     br = branch
     co = checkout
+    cd = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@' | xargs -n 1 git checkout
+    mr = !git merge $1
+    rb = !git rebase $1
     new = checkout -b
-    mv = branch -m
+    def = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+    flush = !git branch --merged | grep -v $(git def) | xargs -n 1 -r git branch -d
 
     # Commit
     a = add
@@ -21,8 +28,13 @@
     ci = commit
     ca = !git add . && git commit
     cu = commit --amend
+    cau = !git add . && git commit --amend
 
     # Remote
+    f = fetch -pv
+    pl = pull
+    ps = push
+    psf = push --force
     pa = !git push --all origin && git push --tags
     pp = !git pull && git push
 
@@ -38,19 +50,13 @@
     dd = !git all-diffs --diff-filter=D
     dm = !git all-diffs --diff-filter=M
     dr = !git all-diffs --diff-filter=R
+    chmod = !git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply
 
     # Undoes
     clear = !git add . && git reset --hard HEAD
-    undo = !git restore -- $1
     untag = !git push --delete origin $1 && git tag --delete $1
     unstage = !git restore --staged -- $1
-    uncommit = !git reset --soft HEAD~
-
-    # Misc
-    f = fetch -pv
-    cp = cherry-pick
-    git = !exec git
-    chmod = !git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply
+    uncommit = reset --soft HEAD~
 
 [gitflow "branch"]
     master = main
