@@ -33,8 +33,8 @@
     # Remote
     f = fetch -pv
     pl = pull
-    ps = push
-    psf = push --force
+    p = push
+    pf = push --force
     pa = !git push --all origin && git push --tags
     pp = !git pull && git push
 
