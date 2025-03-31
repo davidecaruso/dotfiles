@@ -20,7 +20,7 @@
     rb = !git rebase $1
     new = checkout -b
     def = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
-    flush = !git branch --merged | grep -v $(git def) | xargs -n 1 -r git branch -d
+    cleanup = !git branch --merged | grep -v $(git def) | xargs -n 1 -r git branch -d
 
     # Commit
     a = add
